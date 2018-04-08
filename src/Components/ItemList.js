@@ -38,6 +38,7 @@ class ItemList extends React.Component {
     let newState = this.state;
 
     newState.items.push(newItem);
+    newState.showAddItemMode = false;
 
     this.setState(newState);
 
