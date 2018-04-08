@@ -1,33 +1,59 @@
 import React from 'react';
 import Item from './Item'
+import ItemDetails from './ItemDetails'
+const uuidv4 = require('uuid/v4');
 
 class ItemList extends React.Component {
   constructor(props) {
     super(props);
 
     let items = [
-      {id: 1, title: "Take garbage out"},
-      {id: 2, title: "Clean apartment"},
-      {id: 3, title: "Buy new shoes"},
+      {id: uuidv4(), title: "Take garbage out", category: "Home"},
+      {id: uuidv4(), title: "Clean apartment", category: "Home"},
+      {id: uuidv4(), title: "Buy new shoes", category: "Personal"},
     ]
 
-    this.state = {items: items};
+    this.state = {
+      items: items,
+      showAddItemMode: false
+    };
 
     this.deleteItem = this.deleteItem.bind(this);
+    this.showAddItem = this.showAddItem.bind(this);
+    this.addItem = this.addItem.bind(this);
+  }
+
+  showAddItem() {
+    console.log("i want to add an item");
+    let newState = this.state;
+    newState.showAddItemMode = !newState.showAddItemMode;
+    this.setState(newState);
+  }
+
+  addItem(item) {
+    console.log(item);
+
+    let newItem = {id: uuidv4(), title: item.itemTitle, category: item.itemCategory}
+
+    let newState = this.state;
+
+    newState.items.push(newItem);
+
+    this.setState(newState);
 
   }
 
   deleteItem(id) {
     console.log("will delete item:", id);
 
-    let items = this.state.items;
+    let newState = this.state;
 
-    console.log("before", items);
-    items = items.filter(item => item.id !== id);
+    console.log("before", newState.items);
+    newState.items = newState.items.filter(item => item.id !== id);
 
-    console.log("after", items);
+    console.log("after", newState.items);
 
-    this.setState( { items: items} );
+    this.setState( newState );
   }
 
   render() {
@@ -38,10 +64,14 @@ class ItemList extends React.Component {
 
     return (
       <div>
-        <h3>Hello, I am an ItemList</h3>
+        <h3>Hello, this is your <u><i>Bucket List</i></u>:</h3>
             <ul>
               {itemList}
             </ul>
+            <a href="#" onClick={this.showAddItem}>{this.state.showAddItemMode ? "Cancel" : "Add Item"}</a>
+
+            {this.state.showAddItemMode && <ItemDetails newItem='true' addItem={this.addItem} />}
+
       </div>
     )
   }

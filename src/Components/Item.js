@@ -15,7 +15,7 @@ class Item extends React.Component {
   render() {
     return (
       <li>
-        <strong>Item name:</strong> {this.props.item.title} <a href="#" onClick={this.deleteItem.bind(this, this.props.item.id)}>Delete</a>
+        <strong>Item name:</strong> {this.props.item.title} ({this.props.item.category}) <a href="#" onClick={this.deleteItem.bind(this, this.props.item.id)}>Delete</a>
       </li>
     )
   }
