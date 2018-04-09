@@ -65,7 +65,7 @@ class ItemList extends React.Component {
 
     return (
       <div>
-        <h3>Hello, this is your <u><i>Bucket List</i></u>:</h3>
+        <h3>Yo, this is your <u><i>Bucket List</i></u>:</h3>
             <ul>
               {itemList}
             </ul>
