@@ -27,7 +27,7 @@ class ItemDetails extends React.Component {
         newState.itemCategory = target.value;
         break;
       default:
-        throw("unknown target!");
+        console.log("unknown form entry")
     }
 
     this.setState( newState );

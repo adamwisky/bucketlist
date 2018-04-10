@@ -69,7 +69,7 @@ class ItemList extends React.Component {
             <ul>
               {itemList}
             </ul>
-            <a href="#" onClick={this.showAddItem}>{this.state.showAddItemMode ? "Cancel" : "Add Item"}</a>
+            <button type="button" onClick={this.showAddItem}>{this.state.showAddItemMode ? "Cancel" : "Add Item"}</button>
 
             {this.state.showAddItemMode && <ItemDetails newItem='true' addItem={this.addItem} />}
 
