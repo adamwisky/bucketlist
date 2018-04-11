@@ -6,31 +6,31 @@ class ItemDetails extends React.Component {
     super(props);
 
     this.state = {
-      itemTitle: "",
-      itemCategory: "Personal"
-    }
+      itemTitle: '',
+      itemCategory: 'Personal',
+    };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
-    console.log("at handleChange");
+    console.log('at handleChange');
     let newState = this.state;
     let target = event.target;
 
-    switch(target.name) {
-      case "title":
+    switch (target.name) {
+      case 'title':
         newState.itemTitle = target.value;
         break;
-      case "category":
+      case 'category':
         newState.itemCategory = target.value;
         break;
       default:
-        console.log("unknown form entry")
+        console.log('unknown form entry');
     }
 
-    this.setState( newState );
+    this.setState(newState);
 
   }
 
@@ -39,14 +39,14 @@ class ItemDetails extends React.Component {
 
     console.log(this.state);
 
-    this.props.addItem(this.state)
+    this.props.addItem(this.state);
   }
 
   render() {
     let categories = ['Personal', 'Home', 'Work'];
-    let categoriesSelector = categories.map(category => {
-        return <option key={category} value={category}>{category}</option>
-    });
+    let categoriesSelector = categories.map(category => (
+        <option key={category} value={category}>{category}</option>
+      ));
 
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
@@ -63,8 +63,8 @@ class ItemDetails extends React.Component {
       </label>
         <input type="submit" value="Add Item" />
       </form>
-    )
+    );
   }
 }
 
-export default ItemDetails
+export default ItemDetails;
