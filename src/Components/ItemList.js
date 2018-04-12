@@ -4,23 +4,45 @@ import ItemDetails from './ItemDetails';
 const uuidv4 = require('uuid/v4');
 
 class ItemList extends React.Component {
+
   constructor(props) {
     super(props);
 
+    console.log('showing itemBank:', props.itemBank);
+
     let items = [
+    [
       { id: uuidv4(), title: 'Take garbage out', category: 'Home' },
       { id: uuidv4(), title: 'Clean apartment', category: 'Home' },
       { id: uuidv4(), title: 'Buy new shoes', category: 'Personal' },
+    ],
+    [
+      { id: uuidv4(), title: 'Take garbage out2', category: 'Home' },
+      { id: uuidv4(), title: 'Clean apartment', category: 'Home' },
+      { id: uuidv4(), title: 'Buy new shoes', category: 'Personal' },
+    ],
+    [
+      { id: uuidv4(), title: 'Take garbage out', category: 'Home' },
+      { id: uuidv4(), title: 'Clean apartment', category: 'Home' },
+      { id: uuidv4(), title: 'Buy new shoes', category: 'Personal' },
+    ],
     ];
 
     this.state = {
       items: items,
+      activeItem: props.itemBank,
       showAddItemMode: false,
     };
 
     this.deleteItem = this.deleteItem.bind(this);
     this.showAddItem = this.showAddItem.bind(this);
     this.addItem = this.addItem.bind(this);
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    let newState = prevState;
+    newState.activeItem = nextProps.itemBank;
+    return newState;
   }
 
   showAddItem() {
@@ -37,7 +59,7 @@ class ItemList extends React.Component {
 
     let newState = this.state;
 
-    newState.items.push(newItem);
+    newState.items[newState.activeItem].push(newItem);
     newState.showAddItemMode = false;
 
     this.setState(newState);
@@ -49,23 +71,27 @@ class ItemList extends React.Component {
 
     let newState = this.state;
 
-    console.log('before', newState.items);
-    newState.items = newState.items.filter(item => item.id !== id);
+    let items = newState.items[newState.activeItem];
 
-    console.log('after', newState.items);
+    console.log('before', items);
+    newState.items[newState.activeItem] = items.filter(item => item.id !== id);
+
+    console.log('after', items);
 
     this.setState(newState);
   }
 
   render() {
 
-    const itemList = this.state.items.map((item) =>
-      <Item key={item.id} item={item} onDelete={this.deleteItem}/>
+    const itemList = this.state.items[this.state.activeItem].map((item) =>
+    <div className="row" key={item.id}>
+      <Item item={item} onDelete={this.deleteItem}/>
+    </div>
     );
 
     return (
       <div>
-        <h3>Hi! This is your <u><i>Bucket List</i></u>:</h3>
+        <h1>Hi! This is your Bucket List #{this.state.activeItem}:</h1>
             <ul>
               {itemList}
             </ul>

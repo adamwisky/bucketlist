@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import './App.css';
-import ItemList from './Components/ItemList'
+import MainView from './Components/MainView';
 
 class App extends Component {
   render() {
     return (
-      <ItemList />
+      <div>
+        <div className="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div className="navbar-brand">
+            BucketList App
+          </div>
+        </div>
+        <MainView/>
+    </div>
     );
   }
 }
