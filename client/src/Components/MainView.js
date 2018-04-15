@@ -8,6 +8,8 @@ class MainView extends React.Component {
     super(props);
 
     this.state = { folderChosen: 0 };
+
+    fetch('/ping').then(res => res.text()).then(res => console.log(res));
   }
 
   updateFolder(folderNum) {

@@ -91,7 +91,7 @@ class ItemList extends React.Component {
 
     return (
       <div>
-        <h1>Hi! This is your Bucket List #{this.state.activeItem}:</h1>
+        <h1>Hi! This is your Bucket List #{this.state.activeItem + 1}:</h1>
             <ul>
               {itemList}
             </ul>
